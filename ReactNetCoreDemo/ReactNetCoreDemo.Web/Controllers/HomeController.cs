@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using ReactNetCoreDemo.Web.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,27 +9,53 @@ namespace ReactNetCoreDemo.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private static readonly IList<CommentModel> _comments;
 
-        public HomeController(ILogger<HomeController> logger)
+        static HomeController()
         {
-            _logger = logger;
+            _comments = new List<CommentModel>
+            {
+                new CommentModel
+                {
+                    Id = 1,
+                    Author = "Daniel Lo Nigro",
+                    Text = "Hello ReactJS.NET World!"
+                },
+                new CommentModel
+                {
+                    Id = 2,
+                    Author = "Pete Hunt",
+                    Text = "This is one comment"
+                },
+                new CommentModel
+                {
+                    Id = 3,
+                    Author = "Jordan Walke",
+                    Text = "This is *another* comment"
+                },
+            };
         }
 
-        public IActionResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return View(_comments);
         }
 
-        public IActionResult Privacy()
+        [Route("comments")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public ActionResult Comments()
         {
-            return View();
+            return Json(_comments);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("comments/new")]
+        [HttpPost]
+        public ActionResult AddComment(CommentModel comment)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // Create a fake ID for this comment
+            comment.Id = _comments.Count + 1;
+            _comments.Add(comment);
+            return Content("Success :)");
         }
     }
 }
