@@ -73,8 +73,10 @@ namespace ReactNetCoreDemo.Web
             {
                 config
                     .AddScript("~/js/remarkable.min.js")
-                    .AddScript("~/js/tutorial.jsx");
-
+                    .AddScript("~/js/components/CommentBox.jsx")
+                    .AddScript("~/js/components/Comment.jsx")
+                    .AddScript("~/js/components/CommentForm.jsx")
+                    .AddScript("~/js/components/CommentList.jsx");
                 // If you want to use server-side rendering of React components,
                 // add all the necessary JavaScript files here. This includes
                 // your components as well as all of their dependencies.
