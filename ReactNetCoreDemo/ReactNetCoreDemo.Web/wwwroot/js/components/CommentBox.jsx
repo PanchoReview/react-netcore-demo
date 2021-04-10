@@ -1,7 +1,4 @@
-﻿import CommentList from './CommentList'
-import CommentForm from './CommentForm'
-
-export default class CommentBox extends React.Component {
+﻿class CommentBox extends React.Component {
     constructor(props) {
         super(props);
         this.state = { data: this.props.initialData };

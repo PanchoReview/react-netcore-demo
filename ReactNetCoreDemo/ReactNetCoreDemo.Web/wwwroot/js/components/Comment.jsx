@@ -1,4 +1,4 @@
-﻿export default class Comment extends React.Component {
+﻿class Comment extends React.Component {
     rawMarkup() {
         const md = createRemarkable();
         const rawMarkup = md.render(this.props.children.toString());

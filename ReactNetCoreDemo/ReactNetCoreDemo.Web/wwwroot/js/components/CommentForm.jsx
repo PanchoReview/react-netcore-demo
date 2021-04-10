@@ -1,4 +1,4 @@
-﻿export default class CommentForm extends React.Component {
+﻿class CommentForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = { author: '', text: '' };
