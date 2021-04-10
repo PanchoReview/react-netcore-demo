@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.V8;
 using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 using React.AspNet;
 
@@ -31,8 +31,8 @@ namespace ReactNetCoreDemo.Web
             services.AddReact();
 
             // Make sure a JS engine is registered, or you will get an error!
-            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName)
-              .AddChakraCore();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
+              .AddV8();
 
             services.AddControllersWithViews();
         }
@@ -73,8 +73,10 @@ namespace ReactNetCoreDemo.Web
             {
                 config
                     .AddScript("~/js/remarkable.min.js")
-                    .AddScript("~/js/tutorial.jsx");
-
+                    .AddScript("~/js/components/CommentBox.jsx")
+                    .AddScript("~/js/components/Comment.jsx")
+                    .AddScript("~/js/components/CommentForm.jsx")
+                    .AddScript("~/js/components/CommentList.jsx");
                 // If you want to use server-side rendering of React components,
                 // add all the necessary JavaScript files here. This includes
                 // your components as well as all of their dependencies.
