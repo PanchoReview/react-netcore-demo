@@ -1,16 +1,14 @@
-﻿class Comment extends React.Component {
-    rawMarkup() {
+﻿function Comment(props) {
+    const rawMarkup = () => {
         const md = createRemarkable();
-        const rawMarkup = md.render(this.props.children.toString());
+        const rawMarkup = md.render(props.children.toString());
         return { __html: rawMarkup };
     }
 
-    render() {
-        return (
-            <div className="comment">
-                <h2 className="commentAuthor">{this.props.author}</h2>
-                <span dangerouslySetInnerHTML={this.rawMarkup()} />
-            </div>
-        );
-    }
+    return (
+        <div className="comment">
+            <h2 className="commentAuthor">{props.author}</h2>
+            <span dangerouslySetInnerHTML={rawMarkup()} />
+        </div>
+    );
 }
